@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "rooms": {
+      "$room": {
+        "players": {
+          ".read": "auth != null",
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.hasChildren(['n', 'c', 'x', 'z', 'f', 's', 't'])",
+            "n": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 16" },
+            "c": { ".validate": "newData.isNumber()" },
+            "x": { ".validate": "newData.isNumber() && newData.val() >= -25 && newData.val() <= 25" },
+            "z": { ".validate": "newData.isNumber() && newData.val() >= -35 && newData.val() <= 35" },
+            "f": { ".validate": "newData.isNumber()" },
+            "s": { ".validate": "newData.val() === 'idle' || newData.val() === 'pray'" },
+            "t": { ".validate": "newData.val() === now" },
+            "$other": { ".validate": false }
+          }
+        }
+      }
+    }
+  }
+}
